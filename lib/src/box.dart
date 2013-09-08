@@ -2,15 +2,18 @@ part of message;
 
 /* Public methods */
 
-Future<String> alert(String text, { 
+Future<String> modalbox(String text, { 
             String header,
             String width,
             String height,
-            String okButton : "OK" }){
+            Map<String, String> buttons }){
   
-  MessageBox box = new MessageBox(text, header, "alert");
+  MessageBox box = new MessageBox(text, header, "box");
   box.setSize(width, height);
-  box.addButton(okButton, "ok");
+  
+  if (buttons != null)
+    buttons.forEach((key, value) => box.addButton(value, key));
+  
   return box.show();
 }
 
@@ -18,21 +21,23 @@ Future<String> confirm(String text, {
             String header,
             String width,
             String height,
-            String okButton : "OK" }){
+            String okButton : "OK",
+            String cancelButton : "Cancel" }){
   
   MessageBox box = new MessageBox(text, header, "confirm");
   box.setSize(width, height);
   box.addButton(okButton, "ok");
+  box.addButton(cancelButton, "cancel");
   return box.show();
 }
 
-Future<String> modalbox(String text, { 
+Future<String> alert(String text, { 
             String header,
             String width,
             String height,
             String okButton : "OK" }){
   
-  MessageBox box = new MessageBox(text, header, "box");
+  MessageBox box = new MessageBox(text, header, "alert");
   box.setSize(width, height);
   box.addButton(okButton, "ok");
   return box.show();
@@ -96,7 +101,8 @@ class MessageBox{
     String result = event.target.attributes["result"];
     if (result == null)
       result = event.target.parent.attributes["result"];
-    hide(result);
+    if (result != null)
+      hide(result);
   }
   
   Future<String> show(){
