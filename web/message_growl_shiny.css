@@ -9,7 +9,7 @@
 	min-width: 120px;
 	min-height: 20px;
 	padding:4px 4px 4px 20px;
-	font-family:Tahoma;
+	font-family:Tahoma, Verdana, sans-serif;
 	z-index: 10000;
 
 	margin:5px;
@@ -44,7 +44,7 @@
 	background:-moz-linear-gradient(top, #ffffff 1%, #d0d0d0 99%);
 	box-shadow: 0px 0px 14px #888;
 
-	font-family: Tahoma;
+	font-family: Tahoma, Verdana, sans-serif;
 
 	z-index:20000;
 
