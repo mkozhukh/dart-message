@@ -38,12 +38,13 @@ Future<String> modalbox(String text, {
   return box.show();
 }
 
-class MessageBox{
+class MessageBox{ 
   DivElement _box;
   var _key_handler;
   StringBuffer html = new StringBuffer();
   Completer<String> _ready;
-  
+  NodeValidatorBuilder _validator = new NodeValidatorBuilder.common();
+   
   static DivElement _modality;
   static void modality(bool mode){
     if (MessageBox._modality == null){
@@ -79,6 +80,9 @@ class MessageBox{
       html.write("<div class='dhtmlx_popup_title'>$header</div>");
     html.write("<div class='dhtmlx_popup_text'><span>$text</span></div>");
     html.write("<div class='dhtmlx_popup_controls'>");
+    
+    //Custom html validator
+    _validator.allowElement("div", attributes: ["result"]);
   }
   
   String addButton(String text, String result){
@@ -99,13 +103,13 @@ class MessageBox{
     if (html != null){
       //finalize html initialization
       html.write("</div>");
-      _box.innerHtml = html.toString();
+      _box.setInnerHtml(html.toString(), validator: _validator );
       html = null;
     }
        
     //just ignore second show call, if any
     if (_ready != null)
-      return;
+      return null;
     
     document.body.children.add(_box);
     _position_box();
