@@ -1,7 +1,7 @@
 name: message
-version: 0.1.0
+version: 0.2.0
 author: Maksim Kozhukh <mkozhukh@ya.ru>
 description: Port of jsMessage library. Nice looking notifications, alerts and confirmations.
 homepage: https://github.com/mkozhukh/dart-message
 dependencies:
-  browser: '>=0.5.7'
+  browser: '>=0.7.1'
